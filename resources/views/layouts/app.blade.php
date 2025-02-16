@@ -1,63 +1,221 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="en">
+
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densityDpi=device-dpi" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>@yield('titulo', 'Sazao || e-Commerce HTML Template')</title>
+    <link rel="icon" type="image/png" href="{{ asset('imagenes/law.png') }}">
 
-    <title>@yield('titulo', config('app.name', 'Laravel'))</title>
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Estilos de la plantilla -->
+    <link rel="stylesheet" href="{{ asset('adminkit/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('adminkit/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('adminkit/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('adminkit/css/slick.css') }}">
+    <link rel="stylesheet" href="{{ asset('adminkit/css/jquery.nice-number.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('adminkit/css/jquery.calendar.css') }}">
+    <link rel="stylesheet" href="{{ asset('adminkit/css/add_row_custon.css') }}">
+    <link rel="stylesheet" href="{{ asset('adminkit/css/mobile_menu.css') }}">
+    <link rel="stylesheet" href="{{ asset('adminkit/css/jquery.exzoom.css') }}">
+    <link rel="stylesheet" href="{{ asset('adminkit/css/multiple-image-video.css') }}">
+    <link rel="stylesheet" href="{{ asset('adminkit/css/ranger_style.css') }}">
+    <link rel="stylesheet" href="{{ asset('adminkit/css/jquery.classycountdown.css') }}">
+    <link rel="stylesheet" href="{{ asset('adminkit/css/venobox.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('adminkit/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('adminkit/css/responsive.css') }}">
 </head>
-<body class="bg-light">
 
-    <!-- Barra de Navegación -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow fixed-top">
+<body>
+
+    <!--============================
+        HEADER START
+    ==============================-->
+    <header>
         <div class="container">
-            <!-- Logo y Dashboard -->
-            <a class="navbar-brand d-flex align-items-center" href="{{ route('dashboard') }}">
-                <div class="bg-primary text-white rounded-circle d-flex justify-content-center align-items-center" style="width: 40px; height: 40px;">
-                    ⚡
+            <div class="row">
+                <div class="col-2 col-md-1 d-lg-none">
+                    <div class="wsus__mobile_menu_area">
+                        <span class="wsus__mobile_menu_icon"><i class="fal fa-bars"></i></span>
+                    </div>
                 </div>
-                <span class="ms-2 fw-semibold">Dashboard</span>
-            </a>
-
-            <!-- Botón para móviles -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
-                    <!-- Dropdown de Usuario -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
-                            {{ Auth::user()->name ?? 'Usuario' }}
+                <div class="col-xl-2 col-7 col-md-8 col-lg-2">
+                    <div class="wsus_logo_area">
+                        <a class="wsus__header_logo" href="index.html">
+                            <img src="{{ asset('imagenes/law.png') }}" alt="logo" class="img-fluid w-50">
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="#">Perfil</a></li>
+                    </div>
+                </div>
+                <div class="col-xl-5 col-md-6 col-lg-4 d-none d-lg-block">
+                    <div class="wsus__search">
+                        <form>
+                            <input type="text" placeholder="Search...">
+                            <button type="submit"><i class="far fa-search"></i></button>
+                        </form>
+                    </div>
+                </div>
+                <!-- En la sección del header, reemplaza el bloque del usuario con esto: -->
+                <div class="col-xl-5 col-3 col-md-3 col-lg-6">
+                    <div class="wsus__call_icon_area">
+                        <div class="wsus__call_area">
+                            <div class="wsus__call">
+                                <i class="fas fa-user-headset"></i>
+                            </div>
+                            <div class="wsus__call_text">
+                                <p>Usuario: {{ Auth::user()->name ?? 'Usuario' }} </p>
+                                <p>Correo: {{ Auth::user()->email ?? 'Usuario' }} </p>
+                            </div>
+                        </div>
+                        <ul class="wsus__icon_area">
+                            <!-- Dropdown del usuario -->
+                            <li class="nav-item dropdown">
+                                {{-- <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+                                    {{ Auth::user()->name ?? 'Usuario' }} <!-- Nombre del usuario -->
+                                </a> --}}
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><a class="dropdown-item" href="#">Perfil</a></li>
+                                    <li>
+                                        <form method="POST" action="{{ route('logout') }}">
+                                            @csrf
+                                            <button type="submit" class="dropdown-item">Cerrar sesión</button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="wsus__mini_cart">
+            <h4>shopping cart <span class="wsus_close_mini_cart"><i class="far fa-times"></i></span></h4>
+            <ul>
+                <li>
+                    <div class="wsus__cart_img">
+                        <a href="#"><img src="{{ asset('adminkit/images/tab_2.jpg') }}" alt="product" class="img-fluid w-100"></a>
+                        <a class="wsis__del_icon" href="#"><i class="fas fa-minus-circle"></i></a>
+                    </div>
+                    <div class="wsus__cart_text">
+                        <a class="wsus__cart_title" href="#">apple 9.5" 7 serise tab with full view display</a>
+                        <p>$140 <del>$150</del></p>
+                    </div>
+                </li>
+                <!-- Más elementos del carrito -->
+            </ul>
+            <h5>sub total <span>$3540</span></h5>
+            <div class="wsus__minicart_btn_area">
+                <a class="common_btn" href="cart_view.html">view cart</a>
+                <a class="common_btn" href="check_out.html">checkout</a>
+            </div>
+        </div>
+    </header>
+    <!--============================
+        HEADER END
+    ==============================-->
+
+    <!--============================
+        MAIN MENU START
+    ==============================-->
+    <nav class="wsus__main_menu d-none d-lg-block">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="relative_contect d-flex">
+                        <div class="wsus_menu_category_bar">
+                            <i class="far fa-bars"></i>
+                        </div>
+                        <ul class="wsus__menu_item">
+                            <li><a class="active" href="{{ route('dashboard') }}">Home</a></li>
+                            <li><a href="#">vendor</a></li>
+                            <li><a href="#">blog</a></li>
+                            <li><a href="#">campain</a></li>
+                            {{-- dropdown --}}
+                            <li class="wsus__relative_li"><a href="#">Dropdown<i class="fas fa-caret-down"></i></a>
+                                <ul class="wsus__menu_droapdown">
+                                    <li><a href="404.html">404</a></li>
+                                    <li><a href="faqs.html">faq</a></li>
+                                    <li><a href="invoice.html">invoice</a></li>
+                                    <li><a href="about_us.html">about</a></li>
+                                    <li><a href="product_grid_view.html">product</a></li>
+                                    <li><a href="check_out.html">check out</a></li>
+                                    <li><a href="team.html">team</a></li>
+                                    <li><a href="change_password.html">change password</a></li>
+                                    <li><a href="custom_page.html">custom page</a></li>
+                                    <li><a href="forget_password.html">forget password</a></li>
+                                    <li><a href="privacy_policy.html">privacy policy</a></li>
+                                    <li><a href="product_category.html">product category</a></li>
+                                    <li><a href="brands.html">brands</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">track order</a></li>
+                            <li><a href="{{ route('usuario.index') }}">Usuarios</a></li>
+                        </ul>
+                        <ul class="wsus__menu_item wsus__menu_item_right">
+                            <li><a href="#">contact</a></li>
+                            <li><a href="#">my account</a></li>
                             <li>
-                                <form method="POST" action="{{ route('logout') }}">
+                                <form id="logout-form" method="POST" action="{{ route('logout') }}">
                                     @csrf
-                                    <button type="submit" class="dropdown-item">Cerrar sesión</button>
+                                    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        Login
+                                    </a>
                                 </form>
                             </li>
                         </ul>
-                    </li>
-                </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
+    <!--============================
+        MAIN MENU END
+    ==============================-->
 
-    <!-- Espaciado para el contenido -->
-    <div class="container mt-5 pt-4">
-        <h1>@yield('titulo')</h1>
-        <hr>
+    <!-- Contenido dinámico -->
+    <main>
         @yield('contenido')
-    </div>
+    </main>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!--============================
+        FOOTER PART START
+    ==============================-->
+    <footer class="footer_2">
+        <div class="wsus__footer_bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="wsus__copyright d-flex justify-content-center">
+                            <p>Copyright © 2025 OjaO Contability. Todos los derechos reservados</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--============================
+        FOOTER PART END
+    ==============================-->
+
+    <!-- Scripts de la plantilla -->
+    <script src="{{ asset('adminkit/js/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('adminkit/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('adminkit/js/Font-Awesome.js') }}"></script>
+    <script src="{{ asset('adminkit/js/select2.min.js') }}"></script>
+    <script src="{{ asset('adminkit/js/slick.min.js') }}"></script>
+    <script src="{{ asset('adminkit/js/simplyCountdown.js') }}"></script>
+    <script src="{{ asset('adminkit/js/jquery.exzoom.js') }}"></script>
+    <script src="{{ asset('adminkit/js/jquery.nice-number.min.js') }}"></script>
+    <script src="{{ asset('adminkit/js/jquery.waypoints.min.js') }}"></script>
+    <script src="{{ asset('adminkit/js/jquery.countup.min.js') }}"></script>
+    <script src="{{ asset('adminkit/js/add_row_custon.js') }}"></script>
+    <script src="{{ asset('adminkit/js/multiple-image-video.js') }}"></script>
+    <script src="{{ asset('adminkit/js/sticky_sidebar.js') }}"></script>
+    <script src="{{ asset('adminkit/js/ranger_jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('adminkit/js/ranger_slider.js') }}"></script>
+    <script src="{{ asset('adminkit/js/isotope.pkgd.min.js') }}"></script>
+    <script src="{{ asset('adminkit/js/venobox.min.js') }}"></script>
+    <script src="{{ asset('adminkit/js/jquery.classycountdown.js') }}"></script>
+    <script src="{{ asset('adminkit/js/main.js') }}"></script>
 </body>
+
 </html>
