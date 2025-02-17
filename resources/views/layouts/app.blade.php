@@ -148,7 +148,13 @@
                                 </ul>
                             </li>
                             <li><a href="#">track order</a></li>
-                            <li><a href="{{ route('usuario.index') }}">Usuarios</a></li>
+
+                            {{-- <li><a href="{{ route('usuario.index') }}">Usuarios</a></li> --}}
+                            {{-- asi puedo eliminar algo puntual con los roles --}}
+                            @role('Administrador')
+                                <li><a href="{{ route('usuario.index') }}">Usuarios</a></li>
+                            @endrole
+
                         </ul>
                         <ul class="wsus__menu_item wsus__menu_item_right">
                             <li><a href="#">contact</a></li>
