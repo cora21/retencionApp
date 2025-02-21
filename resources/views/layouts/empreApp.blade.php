@@ -121,11 +121,11 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="relative_contect d-flex">
-                        {{-- <div class="wsus_menu_category_bar">
+                        <div class="wsus_menu_category_bar">
                             <i class="far fa-bars"></i>
-                        </div> --}}
+                        </div>
                         <ul class="wsus__menu_item">
-                            <li><a class="active" href="{{ route('dashboard') }}">Home</a></li>
+                            <li><a class="active" href="{{ route('dashboard') }}">Inicio</a></li>
                             {{-- dropdown para las retenciones --}}
                             <li class="wsus__relative_li"><a href="#">Retenciones<i class="fas fa-caret-down"></i></a>
                                 <ul class="wsus__menu_droapdown">
@@ -133,35 +133,8 @@
                                     <li><a href="#">Generar XLM</a></li>
                                 </ul>
                             </li>
-                            <li><a href="#">blog</a></li>
-                            <li><a href="#">campain</a></li>
-                            {{-- dropdown --}}
-                            <li class="wsus__relative_li"><a href="#">Dropdown<i class="fas fa-caret-down"></i></a>
-                                <ul class="wsus__menu_droapdown">
-                                    <li><a href="404.html">404</a></li>
-                                    <li><a href="faqs.html">faq</a></li>
-                                    <li><a href="invoice.html">invoice</a></li>
-                                    <li><a href="about_us.html">about</a></li>
-                                    <li><a href="product_grid_view.html">product</a></li>
-                                    <li><a href="check_out.html">check out</a></li>
-                                    <li><a href="team.html">team</a></li>
-                                    <li><a href="change_password.html">change password</a></li>
-                                    <li><a href="custom_page.html">custom page</a></li>
-                                    <li><a href="forget_password.html">forget password</a></li>
-                                    <li><a href="privacy_policy.html">privacy policy</a></li>
-                                    <li><a href="product_category.html">product category</a></li>
-                                    <li><a href="brands.html">brands</a></li>
-                                </ul>
-                            </li>
-                            @role('Administrador')
-                            <li><a href="{{ route('gestion.index') }}">Creacion de usuario</a></li>
-                            @endrole
-                            {{-- <li><a href="{{ route('usuario.index') }}">Usuarios</a></li> --}}
-                            {{-- asi puedo eliminar algo puntual con los roles --}}
-                            @role('Administrador')
-                                <li><a href="{{ route('usuario.index') }}">Usuarios</a></li>
-                            @endrole
-
+                            <li><a href="#">Compras</a></li>
+                            <li><a href="#">Ventas</a></li>
                         </ul>
                         <ul class="wsus__menu_item wsus__menu_item_right">
                             <li><a href="#">Contacto</a></li>

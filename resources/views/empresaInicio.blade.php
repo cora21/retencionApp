@@ -1,8 +1,7 @@
-@extends('layouts.app') <!-- Nombre del archivo de la plantilla -->
+@extends('layouts.empreApp') <!-- Nombre del archivo de la plantilla -->
 
 @section('titulo', 'Bienvenido, Empresa')
 
 @section('contenido')
-<h1>Bienvenido, Empresa</h1>
-<p>Esta es tu página de inicio.</p>
+<h3>Bienvenido, Empresa desde la nueva plantilla</h3>
 @endsection

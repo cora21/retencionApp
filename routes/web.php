@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsuariosController;
+use App\Http\Controllers\CreacionUsuarioController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -25,7 +26,11 @@ Route::middleware([
     Route::get('/empresa/inicio', function () {
         return view('empresaInicio');
     })->name('empresa.inicio');
-
     // Otras rutas
     Route::get('index', [UsuariosController::class, 'index'])->name('usuario.index');
+    
+    //rutas para la creacion de usuarios
+    Route::get('gestion-usuarios', [CreacionUsuarioController::class, 'index'])->name('gestion.index');
+    Route::post('creacion-usuarios', [CreacionUsuarioController::class, 'store'])->name('gestion.store');
 });
+
