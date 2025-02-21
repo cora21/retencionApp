@@ -121,12 +121,18 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="relative_contect d-flex">
-                        <div class="wsus_menu_category_bar">
+                        {{-- <div class="wsus_menu_category_bar">
                             <i class="far fa-bars"></i>
-                        </div>
+                        </div> --}}
                         <ul class="wsus__menu_item">
                             <li><a class="active" href="{{ route('dashboard') }}">Home</a></li>
-                            <li><a href="#">vendor</a></li>
+                            {{-- dropdown para las retenciones --}}
+                            <li class="wsus__relative_li"><a href="#">Retenciones<i class="fas fa-caret-down"></i></a>
+                                <ul class="wsus__menu_droapdown">
+                                    <li><a href="#">Comprobantes</a></li>
+                                    <li><a href="#">Generar XLM</a></li>
+                                </ul>
+                            </li>
                             <li><a href="#">blog</a></li>
                             <li><a href="#">campain</a></li>
                             {{-- dropdown --}}
@@ -157,13 +163,13 @@
 
                         </ul>
                         <ul class="wsus__menu_item wsus__menu_item_right">
-                            <li><a href="#">contact</a></li>
-                            <li><a href="#">my account</a></li>
+                            <li><a href="#">Contacto</a></li>
+                            <li><a href="#">Mi cuenta</a></li>
                             <li>
                                 <form id="logout-form" method="POST" action="{{ route('logout') }}">
                                     @csrf
                                     <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                        Login
+                                        Cerrar sesión
                                     </a>
                                 </form>
                             </li>
