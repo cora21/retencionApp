@@ -3,10 +3,12 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsuariosController;
 use App\Http\Controllers\CreacionUsuarioController;
+use App\Http\Controllers\PerfilController;
 
 Route::get('/', function () {
     return view('auth.login');
 });
+
 
 Route::middleware([
     'auth:sanctum',
@@ -32,5 +34,10 @@ Route::middleware([
     //rutas para la creacion de usuarios
     Route::get('gestion-usuarios', [CreacionUsuarioController::class, 'index'])->name('gestion.index');
     Route::post('creacion-usuarios', [CreacionUsuarioController::class, 'store'])->name('gestion.store');
+
+    //ruta para las empresas todo dentro de la la carpeta empresa
+    Route::get('perfilEmpresa', [PerfilController::class, 'index'])->name('perfilEmpresa.index');
+    Route::put('perfilEmpresa/update', [PerfilController::class, 'update'])->name('perfilEmpresa.update');
+
 });
 

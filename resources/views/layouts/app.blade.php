@@ -154,7 +154,7 @@
                                 </ul>
                             </li>
                             @role('Administrador')
-                            <li><a href="{{ route('gestion.index') }}">Creacion de usuario</a></li>
+                            <li><a href="{{ route('gestion.index') }}">Creacion de usuarios</a></li>
                             @endrole
                             {{-- <li><a href="{{ route('usuario.index') }}">Usuarios</a></li> --}}
                             {{-- asi puedo eliminar algo puntual con los roles --}}

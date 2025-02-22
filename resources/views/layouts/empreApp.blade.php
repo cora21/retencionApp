@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -41,7 +41,7 @@
                 </div>
                 <div class="col-xl-2 col-7 col-md-8 col-lg-2">
                     <div class="wsus_logo_area">
-                        <a class="wsus__header_logo" href="index.html">
+                        <a class="wsus__header_logo" href="{{ route('dashboard') }}">
                             <img src="{{ asset('imagenes/law.png') }}" alt="logo" class="img-fluid w-50">
                         </a>
                     </div>
@@ -121,11 +121,11 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="relative_contect d-flex">
-                        <div class="wsus_menu_category_bar">
+                        {{-- <div class="wsus_menu_category_bar">
                             <i class="far fa-bars"></i>
-                        </div>
+                        </div> --}}
                         <ul class="wsus__menu_item">
-                            <li><a class="active" href="{{ route('dashboard') }}">Inicio</a></li>
+                            <li><a class="active" href="{{ route('dashboard') }}"> Inicio </a></li>
                             {{-- dropdown para las retenciones --}}
                             <li class="wsus__relative_li"><a href="#">Retenciones<i class="fas fa-caret-down"></i></a>
                                 <ul class="wsus__menu_droapdown">
@@ -138,7 +138,7 @@
                         </ul>
                         <ul class="wsus__menu_item wsus__menu_item_right">
                             <li><a href="#">Contacto</a></li>
-                            <li><a href="#">Mi cuenta</a></li>
+                            <li><a href="{{ route('perfilEmpresa.index') }}">Mi cuenta</a></li>
                             <li>
                                 <form id="logout-form" method="POST" action="{{ route('logout') }}">
                                     @csrf
