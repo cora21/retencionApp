@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 
 class PerfilController extends Controller{
     
@@ -58,36 +60,61 @@ class PerfilController extends Controller{
     $user->assignRole($role);
 
     // Redirigir con un mensaje de éxito
-    return redirect()->route('perfilEmpresa.index')->with('success', 'Empresa creada exitosamente.');
+    return redirect()->route('empresa.inicio')->with('success', 'Empresa creada exitosamente.');
 }
 
-// Actualizar el perfil de la empresa
-public function update(Request $request)
-{
-    // Validar los datos del formulario
-    $request->validate([
-        'nombre_comercial' => 'required|string|max:255',
-        'direccionEmpresa' => 'required|string|max:255',
-        'telefonoEmpresa' => 'required|string|max:20',
-        'descripcionEmpresa' => 'nullable|string',
-        'rif_cedulaEmpresa' => 'required|string|max:20',
-        'correoEmpresa' => 'required|string|email|max:255',
-    ]);
-
-    // Obtener el usuario autenticado
-    $user = Auth::user();
-
-    // Crear o actualizar el perfil de la empresa
-    if ($user->empresa) {
-        // Actualizar los datos existentes
-        $user->empresa->update($request->all());
-    } else {
-        // Crear un nuevo registro de empresa
-        $user->empresa()->create($request->all());
+    // Actualizar el perfil de la empresa
+    public function update(Request $request){
+        // Validar los datos del formulario
+        $request->validate([
+            'nombre_comercial' => 'required|string|max:255',
+            'direccionEmpresa' => 'required|string|max:255',
+            'telefonoEmpresa' => 'required|string|max:20',
+            'descripcionEmpresa' => 'nullable|string',
+            'rif_cedulaEmpresa' => 'required|string|max:20',
+            'correoEmpresa' => 'required|string|email|max:255',
+        ]);
+        // Obtener el usuario autenticado
+        $user = Auth::user();
+        // Crear o actualizar el perfil de la empresa
+        if ($user->empresa) {
+            // Actualizar los datos existentes
+            $user->empresa->update($request->all());
+        } else {
+            // Crear un nuevo registro de empresa
+            $user->empresa()->create($request->all());
+        }
+        // Redirigir con un mensaje de éxito
+        return redirect()->route('empresa.inicio')->with('success', 'Perfil actualizado exitosamente.');
     }
 
-    // Redirigir con un mensaje de éxito
-    return redirect()->route('perfilEmpresa.index')->with('success', 'Perfil actualizado exitosamente.');
-}
 
+    public function updateUsuario(Request $request){
+        // Obtener el usuario autenticado
+        $user = Auth::user();
+        // Validar los datos del formulario
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+            'password' => 'nullable|string|min:8|confirmed', // La contraseña es opcional
+        ]);
+        // Si la validación falla, redirigir con errores
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        // Actualizar el nombre y el correo electrónico
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        // Actualizar la contraseña solo si se proporciona
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->input('password'));
+        }
+        // Guardar los cambios en la base de datos
+        $user->save();
+        // Redirigir con un mensaje de éxito
+        return redirect()->route('perfilEmpresa.index')
+            ->with('success', 'Perfil de usuario actualizado correctamente.');
+    }
 }

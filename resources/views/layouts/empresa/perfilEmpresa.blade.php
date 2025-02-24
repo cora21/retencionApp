@@ -27,56 +27,70 @@
                             </div>
                         @endif
                 
-                        <!-- Formulario de perfil de la empresa -->
-                        <form action="{{ route('perfilEmpresa.update') }}" method="POST">
+                        <form action="{{ route('perfilEmpresa.update') }}" method="POST" class="needs-validation" novalidate>
                             @csrf
                             @method('PUT')
-                
-                            <!-- Campo: Nombre Comercial -->
-                            <div class="form-group">
-                                <label for="nombre_comercial">Nombre Comercial:</label>
-                                <input type="text" name="nombre_comercial" class="form-control w-50" 
-                                       value="{{ auth()->user()->empresa ? auth()->user()->empresa->nombre_comercial : '' }}" required>
+                        
+                            <div class="row">
+                                <!-- Nombre Comercial -->
+                                <div class="col-md-6">
+                                    <label for="nombre_comercial" class="form-label">Nombre Comercial</label>
+                                    <input type="text" name="nombre_comercial" class="form-control" 
+                                           value="{{ auth()->user()->empresa ? auth()->user()->empresa->nombre_comercial : '' }}" required>
+                                    <small class="form-text text-muted">Ingrese el nombre con el que se identifica la empresa.</small>
+                                    <div class="invalid-feedback">Este campo es obligatorio.</div>
+                                </div>
+                        
+                                <!-- RIF/Cédula -->
+                                <div class="col-md-6">
+                                    <label for="rif_cedulaEmpresa" class="form-label">RIF/Cédula</label>
+                                    <input type="text" name="rif_cedulaEmpresa" class="form-control" 
+                                           value="{{ auth()->user()->empresa ? auth()->user()->empresa->rif_cedulaEmpresa : '' }}" required>
+                                    <small class="form-text text-muted">Ingrese el RIF o cédula jurídica de la empresa.</small>
+                                    <div class="invalid-feedback">Este campo es obligatorio.</div>
+                                </div>
                             </div>
-                
-                            <!-- Campo: Dirección -->
-                            <div class="form-group">
-                                <label for="direccionEmpresa">Dirección:</label>
-                                <input type="text" name="direccionEmpresa" class="form-control w-50" 
-                                       value="{{ auth()->user()->empresa ? auth()->user()->empresa->direccionEmpresa : '' }}" required>
+                        
+                            <div class="row mt-3">
+                                <!-- Correo Electrónico -->
+                                <div class="col-md-6">
+                                    <label for="correoEmpresa" class="form-label">Correo Electrónico</label>
+                                    <input type="email" name="correoEmpresa" class="form-control" 
+                                           value="{{ auth()->user()->empresa ? auth()->user()->empresa->correoEmpresa : '' }}" required>
+                                    <small class="form-text text-muted">Ingrese el correo electrónico oficial de la empresa.</small>
+                                    <div class="invalid-feedback">Ingrese un correo válido.</div>
+                                </div>
+                        
+                                <!-- Teléfono -->
+                                <div class="col-md-6">
+                                    <label for="telefonoEmpresa" class="form-label">Teléfono</label>
+                                    <input type="text" name="telefonoEmpresa" id="telefonoEmpresa" class="form-control"
+                                           value="{{ auth()->user()->empresa ? auth()->user()->empresa->telefonoEmpresa : '' }}" required>
+                                    <small class="form-text text-muted">Número de contacto de la empresa (Ejemplo: (0412) 318-98-85).</small>
+                                    <div class="invalid-feedback">Este campo es obligatorio.</div>
+                                </div>
                             </div>
-                
-                            <!-- Campo: Teléfono -->
-                            <div class="form-group">
-                                <label for="telefonoEmpresa">Teléfono:</label>
-                                <input type="text" name="telefonoEmpresa" class="form-control w-50" 
-                                       value="{{ auth()->user()->empresa ? auth()->user()->empresa->telefonoEmpresa : '' }}" required>
+                        
+                            <div class="row mt-3">
+                                <!-- Dirección -->
+                                <div class="col-md-6">
+                                    <label for="direccionEmpresa" class="form-label">Dirección</label>
+                                    <textarea name="direccionEmpresa" class="form-control" rows="3" style="resize: none;" required>{{ auth()->user()->empresa ? auth()->user()->empresa->direccionEmpresa : '' }}</textarea>
+                                    <small class="form-text text-muted">Indique la dirección de la empresa como aparece en el Rif.</small>
+                                    <div class="invalid-feedback">Este campo es obligatorio.</div>
+                                </div>
+                        
+                                <!-- Descripción -->
+                                <div class="col-md-6">
+                                    <label for="descripcionEmpresa" class="form-label">Descripción</label>
+                                    <textarea name="descripcionEmpresa" class="form-control" rows="3" style="resize: none;">{{ auth()->user()->empresa ? auth()->user()->empresa->descripcionEmpresa : '' }}</textarea>
+                                    <small class="form-text text-muted">Breve descripción de la empresa, servicios o productos que ofrece.</small>
+                                </div>
                             </div>
-                
-                            <!-- Campo: Descripción -->
-                            <div class="form-group">
-                                <label for="descripcionEmpresa">Descripción:</label>
-                                <textarea name="descripcionEmpresa" class="form-control w-50">
-                                    {{ auth()->user()->empresa ? auth()->user()->empresa->descripcionEmpresa : '' }}
-                                </textarea>
+                        
+                            <div class="mt-4">
+                                <button type="submit" class="btn btn-primary">Guardar Perfil</button>
                             </div>
-                
-                            <!-- Campo: RIF/Cédula -->
-                            <div class="form-group">
-                                <label for="rif_cedulaEmpresa">RIF/Cédula:</label>
-                                <input type="text" name="rif_cedulaEmpresa" class="form-control w-50" 
-                                       value="{{ auth()->user()->empresa ? auth()->user()->empresa->rif_cedulaEmpresa : '' }}" required>
-                            </div>
-                
-                            <!-- Campo: Correo Electrónico -->
-                            <div class="form-group">
-                                <label for="correoEmpresa">Correo Electrónico:</label>
-                                <input type="email" name="correoEmpresa" class="form-control w-50" 
-                                       value="{{ auth()->user()->empresa ? auth()->user()->empresa->correoEmpresa : '' }}" required>
-                            </div>
-                            <br>
-                            <!-- Botón de guardar -->
-                            <button type="submit" class="btn btn-primary">Guardar Perfil</button>
                         </form>
                     </div>
                 </div>
@@ -90,24 +104,58 @@
                     <div class="card-body">
                         <div class="container">
                             <h2>Configuración del inicio de sesión</h2>
-                            <input type="email" name="email" class="form-control" value="{{ auth()->user()->id }}">
-                            <form action="{{ route('perfilEmpresa.update') }}" method="POST">
+                            <input type="hidden" name="email" class="form-control" value="{{ auth()->user()->id }}">
+                            <form action="{{ route('perfilUsuario.update') }}" method="POST" class="needs-validation" novalidate>
                                 @csrf
                                 @method('PUT')
-                                <div class="form-group">
-                                    <label for="name">Nombre:</label>
-                                    <input type="text" name="name" class="form-control" value="{{ auth()->user()->name }}" required>
+                            
+                                <div class="row">
+                                    <!-- Nombre -->
+                                    <div class="col-md-6">
+                                        <label for="name" class="form-label">Nombre</label>
+                                        <input type="text" name="name" class="form-control" value="{{ auth()->user()->name }}" required>
+                                        <small class="form-text text-muted">Ingrese su nombre completo.</small>
+                                        <div class="invalid-feedback">Este campo es obligatorio.</div>
+                                    </div>
+                            
+                                    <!-- Correo Electrónico -->
+                                    <div class="col-md-6">
+                                        <label for="email" class="form-label">Correo Electrónico</label>
+                                        <input type="email" name="email" class="form-control" value="{{ auth()->user()->email }}" required>
+                                        <small class="form-text text-muted">Ingrese su dirección de correo válida.</small>
+                                        <div class="invalid-feedback">Este campo es obligatorio.</div>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="email">Correo electrónico:</label>
-                                    <input type="email" name="email" class="form-control" value="{{ auth()->user()->email }}" required>
+                            
+                                <div class="row mt-3">
+                                    <!-- Nueva Contraseña -->
+                                    <div class="col-md-6">
+                                        <label for="password" class="form-label">Nueva Contraseña</label>
+                                        <div class="input-group">
+                                            <input type="password" name="password" id="password" class="form-control" placeholder="********">
+                                            <button class="btn btn-outline-secondary toggle-password" type="button" data-target="password">
+                                                👁️
+                                            </button>
+                                        </div>
+                                        <small class="form-text text-muted">Dejar en blanco para no cambiar.</small>
+                                    </div>
+                            
+                                    <!-- Confirmar Contraseña -->
+                                    <div class="col-md-6">
+                                        <label for="password_confirmation" class="form-label">Confirmar Contraseña</label>
+                                        <div class="input-group">
+                                            <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" placeholder="********">
+                                            <button class="btn btn-outline-secondary toggle-password" type="button" data-target="password_confirmation">
+                                                👁️
+                                            </button>
+                                        </div>
+                                        <div class="invalid-feedback">Las contraseñas deben coincidir.</div>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="password">Nueva Contraseña:</label>
-                                    <input type="password" name="password" class="form-control" placeholder="dejar en blanco para no cambiar">
+                            
+                                <div class="mt-4">
+                                    <button type="submit" class="btn btn-primary">Actualizar Perfil</button>
                                 </div>
-                                <br>
-                                <button type="submit" class="btn btn-primary">Actualizar Perfil</button>
                             </form>
                         </div>
                     </div>
@@ -134,8 +182,95 @@
 
 
 
+    <script>
+        // Bootstrap validación frontend
+        (function () {
+            'use strict';
+            var forms = document.querySelectorAll('.needs-validation');
+            Array.prototype.slice.call(forms).forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        })();
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const telefonoInput = document.getElementById("telefonoEmpresa");
+    
+            telefonoInput.addEventListener("input", function() {
+                let value = telefonoInput.value.replace(/\D/g, ""); // Eliminar todo lo que no sea número
+                if (value.length > 11) value = value.substring(0, 11); // Limitar a 11 dígitos
+    
+                let formattedValue = "";
+                if (value.length >= 4) {
+                    formattedValue = `(${value.substring(0, 4)}) `;
+                    if (value.length >= 7) {
+                        formattedValue += `${value.substring(4, 7)}-`;
+                        if (value.length > 7) {
+                            formattedValue += `${value.substring(7, 9)}-`;
+                            if (value.length > 9) {
+                                formattedValue += `${value.substring(9, 11)}`;
+                            }
+                        }
+                    } else {
+                        formattedValue += value.substring(4);
+                    }
+                } else {
+                    formattedValue = value;
+                }
+    
+                telefonoInput.value = formattedValue;
+            });
+        });
+    </script>
 
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.querySelector('.needs-validation');
+        const passwordInput = document.getElementById("password");
+        const confirmPasswordInput = document.getElementById("password_confirmation");
+        const togglePasswordButtons = document.querySelectorAll(".toggle-password");
 
+        // Mostrar/Ocultar contraseñas
+        togglePasswordButtons.forEach(button => {
+            button.addEventListener("click", function () {
+                const targetId = this.getAttribute("data-target");
+                const targetInput = document.getElementById(targetId);
+
+                if (targetInput.type === "password") {
+                    targetInput.type = "text";
+                    this.textContent = "🙈";
+                } else {
+                    targetInput.type = "password";
+                    this.textContent = "👁️";
+                }
+            });
+        });
+
+        // Validar que las contraseñas coincidan
+        confirmPasswordInput.addEventListener("input", function () {
+            if (passwordInput.value !== confirmPasswordInput.value) {
+                confirmPasswordInput.setCustomValidity("Las contraseñas no coinciden.");
+            } else {
+                confirmPasswordInput.setCustomValidity("");
+            }
+        });
+
+        // Validación Bootstrap
+        form.addEventListener("submit", function (event) {
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+        }, false);
+    });
+</script>
 
 @endsection

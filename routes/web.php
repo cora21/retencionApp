@@ -38,6 +38,7 @@ Route::middleware([
     //ruta para las empresas todo dentro de la la carpeta empresa
     Route::get('perfilEmpresa', [PerfilController::class, 'index'])->name('perfilEmpresa.index');
     Route::put('perfilEmpresa/update', [PerfilController::class, 'update'])->name('perfilEmpresa.update');
+    Route::put('/perfil-usuario', [PerfilController::class, 'updateUsuario'])->name('perfilUsuario.update');
 
 });
 
