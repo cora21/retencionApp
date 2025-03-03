@@ -133,7 +133,7 @@
                                     <li><a href="#">Generar XLM</a></li>
                                 </ul>
                             </li>
-                            <li><a href="#">Compras</a></li>
+                            <li><a href="{{ route('compra.index') }}">Compras</a></li>
                             <li><a href="#">Ventas</a></li>
                         </ul>
                         <ul class="wsus__menu_item wsus__menu_item_right">

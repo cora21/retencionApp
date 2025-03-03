@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsuariosController;
 use App\Http\Controllers\CreacionUsuarioController;
 use App\Http\Controllers\PerfilController;
+use App\Http\Controllers\CompraController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -40,5 +41,7 @@ Route::middleware([
     Route::put('perfilEmpresa/update', [PerfilController::class, 'update'])->name('perfilEmpresa.update');
     Route::put('/perfil-usuario', [PerfilController::class, 'updateUsuario'])->name('perfilUsuario.update');
 
+    // rutas para el libro de compras
+    Route::get('compras', [CompraController::class, 'index'])->name('compra.index');
 });
 
